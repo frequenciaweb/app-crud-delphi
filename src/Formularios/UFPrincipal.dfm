@@ -862,7 +862,7 @@ object FPrincipal: TFPrincipal
   end
   object tm_principal: TTimer
     OnTimer = tm_principalTimer
-    Left = 1632
-    Top = 144
+    Left = 488
+    Top = 288
   end
 end

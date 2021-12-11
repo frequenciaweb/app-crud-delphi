@@ -3,7 +3,8 @@ unit UFUsuarios;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.DB, Vcl.Grids,
   Vcl.DBGrids, Vcl.ExtCtrls, Vcl.Buttons, FireDAC.Stan.Intf,
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
@@ -48,43 +49,60 @@ implementation
 
 {$R *.dfm}
 
-
-
+uses UFMensagem, ULog;
 
 procedure TFUsuarios.cb_pesquisar_porChange(Sender: TObject);
 begin
   if (cb_pesquisar_por.ItemIndex = 0) then
-      edt_pesquisa.EditLabel.Caption := 'Digite o Nome';
+    edt_pesquisa.EditLabel.Caption := 'Digite o Nome';
 
   if (cb_pesquisar_por.ItemIndex = 1) then
-      edt_pesquisa.EditLabel.Caption := 'Digite o E-mail';
+    edt_pesquisa.EditLabel.Caption := 'Digite o E-mail';
 end;
 
 procedure TFUsuarios.sb_pesquisarClick(Sender: TObject);
 var
-  sql : string;
-
+  sql: string;
 begin
-  FDUsuarios.Active:= false;
-  FDUsuarios.SQL.Clear;
-  FDUsuarios.SQL.Add('select * from usuarios where 1=1');
+  try
+    FDUsuarios.Active := false;
+    FDUsuarios.sql.Clear;
+    FDUsuarios.sql.Add('select * from from usuarios where 1=1');
 
-  if cb_situacao.ItemIndex = 1 then
-     FDUsuarios.SQL.Add('and ativo = 1');//Ativos
+    if cb_situacao.ItemIndex = 1 then
+      FDUsuarios.sql.Add('and ativo = 1'); // Ativos
 
-  if cb_situacao.ItemIndex = 2 then
-     FDUsuarios.SQL.Add('and ativo = 0');//Inativos
+    if cb_situacao.ItemIndex = 2 then
+      FDUsuarios.sql.Add('and ativo = 0'); // Inativos
 
-  if cb_pesquisar_por.ItemIndex = 0 (*Pesquisa por nome*) then
-     FDUsuarios.SQL.Add('and nome like '+ QuotedStr('%'+edt_pesquisa.Text+'%'));
+    if cb_pesquisar_por.ItemIndex = 0 (* Pesquisa por nome *) then
+      FDUsuarios.sql.Add('and nome like ' +
+        QuotedStr('%' + edt_pesquisa.Text + '%'));
 
-  if cb_pesquisar_por.ItemIndex = 1 (*Pesquisa por e-mail*) then
-     FDUsuarios.SQL.Add('and email like '+ QuotedStr('%'+edt_pesquisa.Text+'%'));
+    if cb_pesquisar_por.ItemIndex = 1 (* Pesquisa por e-mail *) then
+      FDUsuarios.sql.Add('and email like ' +
+        QuotedStr('%' + edt_pesquisa.Text + '%'));
 
-   sql := FDUsuarios.SQL.Text;
+    sql := FDUsuarios.sql.Text;
 
-  FDUsuarios.Active:= true;
+    FDUsuarios.Active := true;
 
+
+
+    if FDUsuarios.RecordCount = 0 then
+         TMensagem.MostrarMensagem('Desculpe!, esta pesquisa não retornou nenhum resultado!', tpInformacao);
+
+  except
+    on E: Exception do
+    begin
+      TLog.EscreverLog(e);
+      if E.Message.Contains('Can''t connect to MySQL') then
+      begin
+        TMensagem.MostrarMensagem('Falha ao conectar no banco de dados', tpErro);
+      end;
+      TMensagem.MostrarMensagem('Erro interno na aplicação, tente novamente mais tarde e caso o erro persista, por favor acione o suporte', tpErro);
+    end;
+  END;
 end;
 
 procedure TFUsuarios.sb_sairClick(Sender: TObject);

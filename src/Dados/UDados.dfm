@@ -6,7 +6,7 @@ object DM: TDM
     Params.Strings = (
       'Database=crudmodelo'
       'User_Name=root'
-      'Password=134679'
+      'Password=Ab134679'
       'Server=localhost'
       'DriverID=MySQL')
     LoginPrompt = False

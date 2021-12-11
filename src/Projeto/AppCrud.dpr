@@ -6,7 +6,9 @@ uses
   UFUsuarios in '..\Formularios\UFUsuarios.pas' {FUsuarios},
   UDados in '..\Dados\UDados.pas' {DM: TDataModule},
   UFPerfis in '..\Formularios\UFPerfis.pas' {FPerfis},
-  UFormFilho in '..\Utilitarios\UFormFilho.pas';
+  UFormFilho in '..\Utilitarios\UFormFilho.pas',
+  UFMensagem in '..\Formularios\UFMensagem.pas' {Mensagem},
+  ULog in '..\Utilitarios\ULog.pas';
 
 {$R *.res}
 
