@@ -3,12 +3,14 @@ program AppCrud;
 uses
   Vcl.Forms,
   UFPrincipal in '..\Formularios\UFPrincipal.pas' {FPrincipal},
-  UFUsuarios in '..\Formularios\UFUsuarios.pas' {FUsuarios},
   UDados in '..\Dados\UDados.pas' {DM: TDataModule},
   UFPerfis in '..\Formularios\UFPerfis.pas' {FPerfis},
   UFormFilho in '..\Utilitarios\UFormFilho.pas',
   UFMensagem in '..\Formularios\UFMensagem.pas' {Mensagem},
-  ULog in '..\Utilitarios\ULog.pas';
+  ULog in '..\Utilitarios\ULog.pas',
+  UFUsuarioCadastro in '..\Formularios\Usuarios\UFUsuarioCadastro.pas' {FUsuarioCadastro},
+  UFUsuarios in '..\Formularios\Usuarios\UFUsuarios.pas' {FUsuarios},
+  UEmail in '..\Utilitarios\UEmail.pas';
 
 {$R *.res}
 

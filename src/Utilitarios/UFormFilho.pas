@@ -17,6 +17,7 @@ type
   public
     { Public declarations }
     procedure Fechar();
+    procedure AbrirFormulariosCadastro(classeForm: TComponentClass; titulo: string);
   end;
 
 var
@@ -27,6 +28,17 @@ implementation
 
 
 { TFormFilho }
+
+procedure TFormFilho.AbrirFormulariosCadastro(classeForm: TComponentClass;
+  titulo: string);
+var form : Tform;
+begin
+  Application.CreateForm(classeForm, form);
+  form.Caption := titulo;
+  form.Position := poScreenCenter;
+  form.BorderIcons:= [];
+  form.ShowModal;
+end;
 
 procedure TFormFilho.Fechar;
 begin

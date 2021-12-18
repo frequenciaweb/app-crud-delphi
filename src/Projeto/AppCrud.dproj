@@ -141,10 +141,6 @@
             <Form>FPrincipal</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\Formularios\UFUsuarios.pas">
-            <Form>FUsuarios</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="..\Dados\UDados.pas">
             <Form>DM</Form>
             <FormType>dfm</FormType>
@@ -160,6 +156,15 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Utilitarios\ULog.pas"/>
+        <DCCReference Include="..\Formularios\Usuarios\UFUsuarioCadastro.pas">
+            <Form>FUsuarioCadastro</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Formularios\Usuarios\UFUsuarios.pas">
+            <Form>FUsuarios</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Utilitarios\UEmail.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

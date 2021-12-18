@@ -36,6 +36,7 @@ type
     procedure sb_sairClick(Sender: TObject);
     procedure cb_pesquisar_porChange(Sender: TObject);
     procedure sb_pesquisarClick(Sender: TObject);
+    procedure sb_inserirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -49,7 +50,7 @@ implementation
 
 {$R *.dfm}
 
-uses UFMensagem, ULog;
+uses UFMensagem, ULog, UFUsuarioCadastro;
 
 procedure TFUsuarios.cb_pesquisar_porChange(Sender: TObject);
 begin
@@ -60,6 +61,11 @@ begin
     edt_pesquisa.EditLabel.Caption := 'Digite o E-mail';
 end;
 
+procedure TFUsuarios.sb_inserirClick(Sender: TObject);
+begin
+  AbrirFormulariosCadastro(TFUsuarioCadastro, 'Cadastro de Usuários');
+end;
+
 procedure TFUsuarios.sb_pesquisarClick(Sender: TObject);
 var
   sql: string;
@@ -67,7 +73,7 @@ begin
   try
     FDUsuarios.Active := false;
     FDUsuarios.sql.Clear;
-    FDUsuarios.sql.Add('select * from from usuarios where 1=1');
+    FDUsuarios.sql.Add('select * from usuarios where 1=1');
 
     if cb_situacao.ItemIndex = 1 then
       FDUsuarios.sql.Add('and ativo = 1'); // Ativos
@@ -86,8 +92,6 @@ begin
     sql := FDUsuarios.sql.Text;
 
     FDUsuarios.Active := true;
-
-
 
     if FDUsuarios.RecordCount = 0 then
          TMensagem.MostrarMensagem('Desculpe!, esta pesquisa não retornou nenhum resultado!', tpInformacao);

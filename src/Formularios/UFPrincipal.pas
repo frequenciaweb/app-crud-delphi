@@ -41,7 +41,6 @@ begin
    if Assigned(FormularioFilho) then
       FormularioFilho.Fechar;
 
-
   Application.CreateForm(classeForm, FormularioFilho);
   FormularioFilho.WindowState := wsMaximized;
   FormularioFilho.FormStyle := fsMDIChild;
